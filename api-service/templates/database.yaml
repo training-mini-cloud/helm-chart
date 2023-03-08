@@ -1,0 +1,19 @@
+apiVersion: acid.zalan.do/v1
+kind: postgresql
+metadata:
+  name: {{ include "api-service.fullname" . }}-database
+spec:
+  databases:
+    {{- range $name, $user := .Values.databases }}
+    {{ $name | quote }}: {{ $user | quote }}
+    {{- end }}
+  numberOfInstances: 1
+  postgresql:
+    version: "15"
+  teamId: {{ include "api-service.fullname" . }}
+  users:
+    {{- range $name, $user := .Values.databases }}
+    {{ $user | quote }}: []
+    {{- end }}
+  volume:
+    size: 1Gi

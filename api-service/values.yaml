@@ -83,3 +83,5 @@ affinity: {}
 
 databases:
   example: example
+
+config:
